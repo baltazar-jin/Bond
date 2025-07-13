@@ -1,0 +1,42 @@
+name: bond
+description: "A new Flutter project."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.0
+  geolocator: ^10.0.0
+  sqflite: ^2.3.2
+  path_provider: ^2.1.2
+  flutter_map_tile_caching: ^9.0.1
+  connectivity_plus: ^4.0.0
+  flutter_map_mbtiles: ^1.0.4
+
+dev_dependencies:
+  flutter_native_splash: ^2.4.6
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/data/locations.json
+    - assets/maps/cebucity_map.mbtiles
+
+flutter_native_splash:
+  android: true
+  ios: true
+
+  background_image: "assets/icons/background-splash.png"
+  image: "assets/icons/logo.png"
