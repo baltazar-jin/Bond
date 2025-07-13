@@ -8,21 +8,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-<<<<<<< HEAD
 //import 'package:bond/main.dart';
 import 'package:bond/app.dart';
-=======
-import 'package:bond/main.dart';
->>>>>>> da62df71846322b6a5473c2131bf313e4704b6de
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-<<<<<<< HEAD
+
     await tester.pumpWidget(const BondApp());
-=======
-    await tester.pumpWidget(const MyApp());
->>>>>>> da62df71846322b6a5473c2131bf313e4704b6de
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
