@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> da62df71846322b6a5473c2131bf313e4704b6de
 # bond
 
 A new Flutter project.
@@ -14,3 +18,10 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+<<<<<<< HEAD
+=======
+=======
+# Bond
+Offline-first disaster response and family reconnection app built with Flutter and on-device AI.
+>>>>>>> 2e6491bd8e8061e56e9d940b97a02b7dd45527fe
+>>>>>>> da62df71846322b6a5473c2131bf313e4704b6de
