@@ -135,7 +135,6 @@ class _UserProfileViewState extends State<UserScreen> {
                       activeColor: Colors.orange,
                     ),
                   ),
-                  const SizedBox(height: 40),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(
@@ -145,6 +144,9 @@ class _UserProfileViewState extends State<UserScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
                         padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(10),
+                        )
                       ),
                     ),
                   ),
