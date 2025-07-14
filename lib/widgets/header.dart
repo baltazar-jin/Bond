@@ -28,7 +28,7 @@ class AppHeader extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
+            color: Colors.black.withAlpha(8),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),

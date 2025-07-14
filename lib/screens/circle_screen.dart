@@ -207,7 +207,7 @@ class _CircleScreenState extends State<CircleScreen> {
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 6),
-        ...group.map(_circleCard).toList(),
+        ...group.map(_circleCard),
       ],
     );
   }
@@ -224,8 +224,8 @@ class _CircleScreenState extends State<CircleScreen> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.yellow.withOpacity(0.5),
-                Colors.orange.withOpacity(0.5),
+                Colors.yellow.withAlpha(128),
+                Colors.orange.withAlpha(128),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,

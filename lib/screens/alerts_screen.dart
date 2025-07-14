@@ -137,8 +137,8 @@ class _AlertsScreenState extends State<AlertsScreen> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.yellow.withOpacity(0.5),
-                Colors.orange.withOpacity(0.5),
+                Colors.yellow.withAlpha((0.5 * 255).toInt()),
+                Colors.orange.withAlpha((0.5 * 255).toInt()),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,

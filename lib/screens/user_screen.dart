@@ -68,8 +68,8 @@ class _UserProfileViewState extends State<UserScreen> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.yellow.withOpacity(0.5),
-                Colors.orange.withOpacity(0.5),
+                Colors.yellow.withAlpha(127),
+              Colors.orange.withAlpha(127),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,

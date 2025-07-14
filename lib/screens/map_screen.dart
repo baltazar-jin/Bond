@@ -94,7 +94,10 @@ class _MapScreenState extends State<MapScreen> {
         backgroundColor: Colors.orange,
       ),
       body: FlutterMap(
-        options: const MapOptions(center: LatLng(10.3157, 123.8854), zoom: 12),
+        options: const MapOptions(
+          initialCenter: LatLng(10.3157, 123.8854),
+          initialZoom: 12,
+        ),
         children: [
           TileLayer(tileProvider: _offlineProvider!, minZoom: 10, maxZoom: 16),
           if (_online)

@@ -201,7 +201,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.red.withOpacity(0.4),
+                        color: Colors.red.withAlpha((0.4 * 255).toInt()),
                         blurRadius: 16,
                         spreadRadius: 2,
                       ),

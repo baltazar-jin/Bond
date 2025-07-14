@@ -4,8 +4,7 @@ class Navbar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
 
-  const Navbar({Key? key, required this.currentIndex, required this.onTap})
-    : super(key: key);
+  const Navbar({super.key, required this.currentIndex, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
