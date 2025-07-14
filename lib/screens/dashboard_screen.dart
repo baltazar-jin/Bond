@@ -6,7 +6,8 @@ import 'package:bond/screens/alerts_screen.dart';
 import 'package:bond/screens/user_screen.dart';
 import 'package:bond/widgets/header.dart';
 import 'package:bond/widgets/navbar.dart';
-import 'dart:convert';
+import 'package:bond/widgets/SOS.dart';
+import 'package:bond/widgets/user_card.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -64,47 +65,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 onToggle: () => setState(() => _isNight = !_isNight),
               ),
               const SizedBox(height: 20),
+              const SizedBox(height: 10),
 
-              /// STATUS CARD (unchanged)
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.orange),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Row(
-                      children: [
-                        Icon(Icons.wifi_off, size: 14, color: Colors.red),
-                        SizedBox(width: 6),
-                        Text('Status: Offline Mode'),
-                      ],
-                    ),
-                    SizedBox(height: 6),
-                    Row(
-                      children: [
-                        Icon(Icons.bluetooth, size: 14, color: Colors.green),
-                        SizedBox(width: 6),
-                        Text('Bluetooth: Enabled'),
-                      ],
-                    ),
-                    SizedBox(height: 6),
-                    Row(
-                      children: [
-                        Icon(Icons.battery_full, size: 14, color: Colors.green),
-                        SizedBox(width: 6),
-                        Text('Battery: 100%'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              /// STATUS CARD 
+              const RiskStatusCard(),
+              
               const SizedBox(height: 20),
 
-              /// QUICK ACTIONS (unchanged)
+              /// QUICK ACTIONS 
               const Row(
                 children: [
                   Icon(Icons.flash_on, color: Colors.orange, size: 25),
@@ -195,43 +163,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
               /// SOS BUTTON (unchanged)
               Center(
-                child: Container(
-                  width: 160,
-                  height: 160,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.red.withAlpha((0.4 * 255).toInt()),
-                        blurRadius: 16,
-                        spreadRadius: 2,
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.warning, color: Colors.white, size: 28),
-                      SizedBox(height: 8),
-                      Text(
-                        'SOS',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        'Press 3 seconds',
-                        style: TextStyle(fontSize: 12, color: Colors.white70),
-                      ),
-                    ],
-                  ),
+                child: SOSButton(
+                  onPressed:(){
+                    //handle logic 
+                    print('SOS pressed');
+                  },
                 ),
               ),
-
-
             ],
           ),
         ),
