@@ -64,8 +64,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               const SizedBox(height: 24),
 
-              const RiskStatusCard(),
-              const SizedBox(height: 24),
+              RiskStatusCard(),
 
               const Row(
                 children: [
