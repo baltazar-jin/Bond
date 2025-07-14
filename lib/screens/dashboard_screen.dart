@@ -8,6 +8,7 @@ import 'package:bond/widgets/header.dart';
 import 'package:bond/widgets/navbar.dart';
 import 'package:bond/widgets/SOS.dart';
 import 'package:bond/widgets/user_card.dart';
+import 'package:bond/widgets/quickaction.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -18,7 +19,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
-  bool _isNight = false; // track toggle state
+  bool _isNight = false;
 
   void _onItemTapped(int index) {
     setState(() => _selectedIndex = index);
@@ -44,7 +45,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         MaterialPageRoute(builder: (_) => const UserScreen()),
       );
     }
-    // index == 0 (Home) does nothing
   }
 
   @override
@@ -53,29 +53,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
       backgroundColor: const Color(0xFFFFF9F3),
       body: SafeArea(
         child: SingleChildScrollView(
-          // only vertical padding so header can go edge-to-edge horizontally
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// ▶️ NEW HEADER
               AppHeader(
                 location: 'Apas, Cebu City',
                 isNightMode: _isNight,
                 onToggle: () => setState(() => _isNight = !_isNight),
               ),
-              const SizedBox(height: 20),
-              const SizedBox(height: 10),
+              const SizedBox(height: 24),
 
-              /// STATUS CARD 
               const RiskStatusCard(),
-              
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
 
-              /// QUICK ACTIONS 
               const Row(
                 children: [
-                  Icon(Icons.flash_on, color: Colors.orange, size: 25),
+                  Icon(Icons.flash_on, color: Colors.orange, size: 24),
                   SizedBox(width: 4),
                   Text(
                     'Quick Actions',
@@ -83,89 +77,62 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
+
               Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFFFF2CC),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      child: Column(
-                        children: const [
-                          Icon(Icons.groups, color: Colors.orange, size: 25),
-                          SizedBox(height: 6),
-                          Text(
-                            'View Your Circle',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            '5 Members',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ],
+                    child: QuickActionButton(
+                      icon: Icons.groups,
+                      title: 'View Your Circle',
+                      subtitle: '1 sent SOS • All safe',
+                      backgroundColor: const Color(0xFFFFF2CC),
+                      iconColor: Colors.orange,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => CircleScreen()),
                       ),
                     ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFD9F8E5),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      child: Column(
-                        children: const [
-                          Icon(Icons.map, color: Colors.green, size: 25),
-                          SizedBox(height: 4),
-                          Text(
-                            'View Maps',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            '5 Members',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ],
+                    child: QuickActionButton(
+                      icon: Icons.map,
+                      title: 'View Maps',
+                      subtitle: 'Circle: Yellow • Nearby help',
+                      backgroundColor: const Color(0xFFD9F8E5),
+                      iconColor: Colors.green,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const MapScreen()),
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
 
-              /// SOS INSTRUCTIONS (unchanged)
+              const SizedBox(height: 24),
               const Row(
                 children: [
-                  Icon(Icons.warning, color: Colors.orange, size: 25),
-                  SizedBox(width: 6),
+                  Icon(Icons.warning, color: Colors.orange, size: 24),
+                  SizedBox(width: 4),
                   Text(
                     'Send SOS Request',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 8),
               const Text(
                 'Press the SOS button, your live location will be shared with the nearest help centre and your emergency contacts',
                 style: TextStyle(fontSize: 12),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
 
               /// SOS BUTTON (unchanged)
               Center(
                 child: SOSButton(
-                  onPressed:(){
-                    //handle logic 
+                  onPressed: () {
                     print('SOS pressed');
                   },
                 ),
@@ -174,9 +141,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
       ),
-
-      /// BOTTOM NAVIGATION BAR (unchanged)
-      ///
       bottomNavigationBar: Navbar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
