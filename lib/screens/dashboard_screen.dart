@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:bond/screens/map_screen.dart';
 import 'package:bond/screens/circle_screen.dart';
 import 'package:bond/screens/alerts_screen.dart';
 import 'package:bond/screens/user_screen.dart';
 import 'package:bond/widgets/header.dart';
 import 'package:bond/widgets/navbar.dart';
+import 'dart:convert';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -189,7 +191,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 'Press the SOS button, your live location will be shared with the nearest help centre and your emergency contacts',
                 style: TextStyle(fontSize: 12),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
 
               /// SOS BUTTON (unchanged)
               Center(
@@ -228,39 +230,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
 
-              /// RECENT ALERTS (unchanged)
-              const Row(
-                children: [
-                  Icon(Icons.access_time, color: Colors.orange, size: 25),
-                  SizedBox(width: 6),
-                  Text(
-                    'Recent Alerts',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              ..._buildAlertItems(),
 
-              const SizedBox(height: 24),
-
-              /// PREPAREDNESS TIPS (unchanged)
-              const Row(
-                children: [
-                  Icon(Icons.lightbulb, color: Colors.orange),
-                  SizedBox(width: 6),
-                  Text(
-                    'Preparedness Tips',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              ..._buildPreparednessTips(),
-
-              const SizedBox(height: 40),
             ],
           ),
         ),
@@ -271,161 +242,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       bottomNavigationBar: Navbar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-      ),
-    );
-  }
-
-  /// RECENT ALERTS DATA
-  List<Widget> _buildAlertItems() {
-    return [
-      _alertItem(
-        'Flash Flood Warning',
-        'Avoid low-lying areas, Seek higher ground immediately.',
-        '2 min ago',
-        Colors.red,
-      ),
-      _alertItem(
-        'Typhoon Signal #3',
-        'Prepare emergency food and supplies. Evacuation centers now open, check evacuation centers near you.',
-        '2 min ago',
-        Colors.red,
-      ),
-      _alertItem(
-        'Continuous Rainfall Detected',
-        'Landslide-prone areas under watch. Prepare emergency food and supplies. Evacuation centers now open.',
-        '1 hour ago',
-        Colors.orange,
-      ),
-      _alertItem(
-        'Normal Heart Beat',
-        'Normal heart beat detected, normal condition.',
-        '3 hours ago',
-        Colors.green,
-      ),
-    ];
-  }
-
-  Widget _alertItem(
-    String title,
-    String description,
-    String time,
-    Color dotColor,
-  ) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey.shade300),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(Icons.circle, size: 10, color: dotColor),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 13,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(description, style: const TextStyle(fontSize: 12)),
-              ],
-            ),
-          ),
-          const SizedBox(width: 8),
-          Text(time, style: const TextStyle(fontSize: 11, color: Colors.grey)),
-        ],
-      ),
-    );
-  }
-
-  /// PREPAREDNESS TIPS DATA
-  List<Widget> _buildPreparednessTips() {
-    return [
-      _tipItem(
-        'Emergency Kit Essentials',
-        'Review your family emergency plan. Know where to meet and who to contact',
-        'HIGH',
-        Colors.red,
-        const Color.fromRGBO(248, 91, 91, 0.3),
-      ),
-      _tipItem(
-        'Weather Monitoring',
-        'Stay informed about weather conditions and emergency alerts',
-        'MEDIUM',
-        Colors.orange,
-        const Color.fromRGBO(255, 128, 1, 0.3),
-      ),
-      _tipItem(
-        'Review Family',
-        'Review your family emergency plan. Know where to meet and who to contact',
-        'LOW',
-        const Color.fromARGB(255, 200, 180, 0),
-        const Color.fromRGBO(247, 227, 41, 0.3),
-      ),
-    ];
-  }
-
-  Widget _tipItem(
-    String title,
-    String description,
-    String level,
-    Color textColor,
-    Color bgColor,
-  ) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey.shade300),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  description,
-                  style: const TextStyle(fontSize: 12, color: Colors.black87),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-            decoration: BoxDecoration(
-              color: bgColor,
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Text(
-              level,
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.bold,
-                color: textColor,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

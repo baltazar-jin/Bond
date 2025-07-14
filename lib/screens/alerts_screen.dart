@@ -162,50 +162,151 @@ class _AlertsScreenState extends State<AlertsScreen> {
       ),
       backgroundColor: const Color(0xFFFFF9F3),
       body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(top: 0),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: ListView(
+  children: [
+    Expanded(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Row(
                 children: [
-                  const Row(
-                    children: [
-                      Icon(Icons.error_outline, color: Colors.orange, size: 22),
-                      SizedBox(width: 6),
-                      Text(
-                        'Recent Alerts',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.grey.shade300),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      children: [
-                        for (int i = 0; i < _alerts.length; i++)
-                          _alertItem(_alerts[i], i == _alerts.length - 1),
-                      ],
+                  Icon(Icons.error_outline, color: Colors.orange, size: 22),
+                  SizedBox(width: 6),
+                  Text(
+                    'Recent Alerts',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
                     ),
                   ),
                 ],
               ),
-            ),
+              const SizedBox(height: 12),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: [
+                    for (int i = 0; i < _alerts.length; i++)
+                      _alertItem(_alerts[i], i == _alerts.length - 1),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+              const Row(
+                children: [
+                  Icon(Icons.tips_and_updates, color: Colors.deepOrange, size: 22),
+                  SizedBox(width: 6),
+                  Text(
+                    'Preparedness Tips',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              ..._buildPreparednessTips(),
+            ],
           ),
-        ],
+        ),
       ),
+    ),
+  ],
+),
+
       bottomNavigationBar: Navbar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
     );
   }
+}
+
+List<Widget> _buildPreparednessTips() {
+  return [
+    _tipItem(
+      'Emergency Kit Essentials',
+      'Review your family emergency plan. Know where to meet and who to contact',
+      'HIGH',
+      Colors.red,
+      const Color.fromRGBO(248, 91, 91, 0.3),
+    ),
+    _tipItem(
+      'Weather Monitoring',
+      'Stay informed about weather conditions and emergency alerts',
+      'MEDIUM',
+      Colors.orange,
+      const Color.fromRGBO(255, 128, 1, 0.3),
+    ),
+    _tipItem(
+      'Review Family',
+      'Review your family emergency plan. Know where to meet and who to contact',
+      'LOW',
+      const Color.fromARGB(255, 200, 180, 0),
+      const Color.fromRGBO(247, 227, 41, 0.3),
+    ),
+  ];
+}
+
+Widget _tipItem(
+  String title,
+  String description,
+  String level,
+  Color textColor,
+  Color bgColor,
+) {
+  return Container(
+    margin: const EdgeInsets.only(bottom: 8),
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: Colors.grey.shade300),
+    ),
+    child: Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                description,
+                style: const TextStyle(fontSize: 12, color: Colors.black87),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Text(
+            level,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }

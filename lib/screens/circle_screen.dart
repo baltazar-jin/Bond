@@ -48,6 +48,7 @@ class _CircleScreenState extends State<CircleScreen> {
       'location': 'Apas, Cebu City',
       'lastSeen': '6h ago',
       'battery': '100%',
+      'heartRate': '85 bpm',
     },
   ];
 
@@ -59,6 +60,7 @@ class _CircleScreenState extends State<CircleScreen> {
       'location': 'Apas, Cebu City',
       'lastSeen': '6h ago',
       'battery': '100%',
+      'heartRate': '72 bpm',
     },
     {
       'name': 'Micheal Johnson',
@@ -67,6 +69,7 @@ class _CircleScreenState extends State<CircleScreen> {
       'location': 'Apas, Cebu City',
       'lastSeen': '20m ago',
       'battery': '100%',
+      'heartRate': '91 bpm',
     },
     {
       'name': 'Emma Johnson',
@@ -75,6 +78,7 @@ class _CircleScreenState extends State<CircleScreen> {
       'location': 'Apas, Cebu City',
       'lastSeen': '20m ago',
       'battery': '100%',
+      'heartRate': '64 bpm',
     },
   ];
 
@@ -172,24 +176,21 @@ class _CircleScreenState extends State<CircleScreen> {
               ],
             ),
 
-            const SizedBox(height: 6),
+            const SizedBox(height: 2),
 
-            /// View on Map
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  minimumSize: const Size(50, 26),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  visualDensity: VisualDensity.compact,
+             Row(
+              children: [
+                const Icon(Icons.favorite, size: 14, color: Colors.orange),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: Text(
+                    person['heartRate'],
+                    style: const TextStyle(fontSize: 13),
+                  ),
                 ),
-                child: const Text(
-                  'View on Map',
-                  style: TextStyle(fontSize: 12, color: Colors.orange),
-                ),
-              ),
+                const SizedBox(width: 4),
+                Text('View on Map', style: const TextStyle(fontSize: 13, color: Colors.orange, decoration: TextDecoration.underline)),
+              ],
             ),
           ],
         ),
@@ -271,7 +272,6 @@ class _CircleScreenState extends State<CircleScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 10),
           _groupSection('Friends', friends),
           _groupSection('Family Members', familyMembers),
         ],

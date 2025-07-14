@@ -21,10 +21,7 @@ class Navbar extends StatelessWidget {
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Circle'),
         BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.notifications),
-          label: 'Alerts',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.notifications),label: 'Alerts'),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: 'You'),
       ],
     );

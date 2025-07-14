@@ -40,7 +40,7 @@ class AppHeader extends StatelessWidget {
           /// Logo
           Container(
             width: 120,
-            height: 120,
+            height: 80,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
               image: const DecorationImage(
