@@ -15,7 +15,6 @@ class UserScreen extends StatefulWidget {
 class _UserProfileViewState extends State<UserScreen> {
   int _selectedIndex = 4;
 
-  // MOCK DATA – replace with actual device APIs or ViewModel values
   String phoneNumber = '09078334990';
   String location = 'Apas, Cebu City';
   int batteryPercent = 86;
@@ -35,33 +34,23 @@ class _UserProfileViewState extends State<UserScreen> {
     setState(() => _selectedIndex = index);
 
     if (index == 0) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const DashboardScreen()),
-      );
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (_) => const DashboardScreen()));
     } else if (index == 1) {
       Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const CircleScreen()),
-      );
+          context, MaterialPageRoute(builder: (_) => const CircleScreen()));
     } else if (index == 2) {
       Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const MapScreen()),
-      );
+          context, MaterialPageRoute(builder: (_) => const MapScreen()));
     } else if (index == 3) {
       Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => AlertsScreen()),
-      );
+          context, MaterialPageRoute(builder: (_) => AlertsScreen()));
     }
-    // index == 4 (User) – stay on current screen
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Gradient AppBar
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
         child: Container(
@@ -82,24 +71,38 @@ class _UserProfileViewState extends State<UserScreen> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'User Profile',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(color: Colors.black),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: Colors.black),
                 ),
               ),
             ),
           ),
         ),
       ),
-
       backgroundColor: const Color(0xFFFFF9F3),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(top: 0),
-              padding: const EdgeInsets.all(24),
-              child: ListView(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(24, 24, 24, 36),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            /// ✅ USER DETAILS CONTAINER
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     'User Details',
@@ -135,44 +138,68 @@ class _UserProfileViewState extends State<UserScreen> {
                       activeColor: Colors.orange,
                     ),
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.edit),
-                      label: const Text('Change Number'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusGeometry.circular(10),
-                        )
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.logout, color: Colors.red),
-                      label: const Text(
-                        'Sign Out',
-                        style: TextStyle(color: Colors.red),
-                      ),
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: Colors.red),
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
-          ),
-        ],
-      ),
 
+            const SizedBox(height: 20),
+
+            /// ✅ APP VERSION CONTAINER (SEPARATE)
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF9F4E7),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Text(
+                'App Version: 1.0.0',
+                style: TextStyle(fontSize: 14, color: Colors.grey),
+              ),
+            ),
+
+            const SizedBox(height: 24),
+
+            /// ✅ BUTTONS
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.edit, color: Colors.white),
+                label: const Text(
+                  'Change Number',
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.logout, color: Colors.red),
+                label: const Text(
+                  'Sign Out',
+                  style: TextStyle(color: Colors.red),
+                ),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  side: const BorderSide(color: Colors.red),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: Navbar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

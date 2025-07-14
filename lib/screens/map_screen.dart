@@ -36,12 +36,12 @@ class _MapScreenState extends State<MapScreen> {
     try {
       // 1. Get app documents directory
       final dir = await getApplicationDocumentsDirectory();
-      final mbtilesPath = '${dir.path}/cebucity_map.mbtiles';
+      final mbtilesPath = '${dir.path}/cebu_ph.mbtiles';
 
       // 2. Check if file exists; if not, copy from assets
       final file = File(mbtilesPath);
       if (!await file.exists()) {
-        final data = await rootBundle.load('assets/maps/cebucity_map.mbtiles');
+        final data = await rootBundle.load('assets/maps/cebu_ph.mbtiles');
         final bytes = data.buffer.asUint8List();
         await file.writeAsBytes(bytes);
       }
