@@ -59,8 +59,8 @@ class AppHeader extends StatelessWidget {
                 const Text(
                   'Current location',
                   style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w300,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
                     color: Colors.black54,
                   ),
                 ),

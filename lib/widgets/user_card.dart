@@ -23,7 +23,7 @@ class RiskStatusCard extends StatelessWidget {
               Text(
                 'You are at risk',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: Colors.red,
                 ),
