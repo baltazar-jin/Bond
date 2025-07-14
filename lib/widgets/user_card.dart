@@ -1,119 +1,131 @@
 import 'package:flutter/material.dart';
 
 class RiskStatusCard extends StatelessWidget {
-  final String riskLevel; // e.g. "You are at risk"
-  final String weatherCondition; // e.g. "Cloudy"
-  final int humidity; // %
-  final int temperature; // °C
-  final int windSpeed; // km/h
-  final bool isOnline;
-  final bool isBluetoothOn;
-  final int batteryPercent;
-
-  const RiskStatusCard({
-    super.key,
-    required this.riskLevel,
-    required this.weatherCondition,
-    required this.humidity,
-    required this.temperature,
-    required this.windSpeed,
-    required this.isOnline,
-    required this.isBluetoothOn,
-    required this.batteryPercent,
-  });
+  const RiskStatusCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
-        color: Colors.red.shade100,
+        color: const Color(0xFFFFD6D6),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Risk Indicator
+          /// RISK ALERT HEADER (centered)
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Icon(Icons.cancel, color: Colors.red, size: 20),
+              Icon(Icons.error, color: Colors.red, size: 24),
               SizedBox(width: 8),
               Text(
                 'You are at risk',
                 style: TextStyle(
-                  color: Colors.red,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15,
+                  color: Colors.red,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 12),
 
-          // Weather Info
+          /// WEATHER INFO
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Icon(Icons.cloud, color: Colors.black54, size: 20),
-              const SizedBox(width: 8),
+            children: const [
+              Icon(Icons.cloud, color: Colors.black54),
+              SizedBox(width: 8),
               Text(
-                'Weather: $weatherCondition',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                ),
+                'Weather:',
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
+              SizedBox(width: 4),
+              Text('Cloudy'),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
 
+          /// WEATHER METRICS IN A HORIZONTAL LIST
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Humidity: $humidity%'),
-              Text('Temp: $temperature°C'),
-              Text('Wind: $windSpeed km/h'),
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: const [
+              _MetricItem(label: 'Humidity', value: '84%'),
+              _MetricItem(label: 'Temp', value: '31°C'),
+              _MetricItem(label: 'Wind', value: '18 km/h'),
             ],
           ),
+          const SizedBox(height: 10),
+          const Divider(color: Colors.redAccent, thickness: 0.8),
 
-          const SizedBox(height: 12),
-
-          // Status Row
+          /// DEVICE STATUS (HORIZONTAL LIST)
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.wifi_off,
-                      size: 16,
-                      color: isOnline ? Colors.green : Colors.red),
-                  const SizedBox(width: 4),
-                  Text('Status: ${isOnline ? "Online" : "Offline"}'),
-                ],
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: const [
+              _StatusItem(
+                icon: Icons.wifi_off,
+                label: 'Status: Offline',
+                color: Colors.red,
               ),
-              Row(
-                children: [
-                  Icon(Icons.bluetooth,
-                      size: 16,
-                      color: isBluetoothOn ? Colors.green : Colors.red),
-                  const SizedBox(width: 4),
-                  Text('Bluetooth: ${isBluetoothOn ? "Enabled" : "Disabled"}'),
-                ],
+              _StatusItem(
+                icon: Icons.bluetooth,
+                label: 'Bluetooth: Enabled',
+                color: Colors.green,
               ),
-              Row(
-                children: [
-                  const Icon(Icons.battery_full,
-                      size: 16, color: Colors.green),
-                  const SizedBox(width: 4),
-                  Text('Battery: $batteryPercent%'),
-                ],
+              _StatusItem(
+                icon: Icons.battery_full,
+                label: 'Battery: 86%',
+                color: Colors.green,
               ),
             ],
           ),
         ],
       ),
+    );
+  }
+}
+
+class _MetricItem extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _MetricItem({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(label, style: const TextStyle(fontSize: 12, color: Colors.black54)),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: const TextStyle(fontWeight: FontWeight.w600),
+        ),
+      ],
+    );
+  }
+}
+
+class _StatusItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color color;
+
+  const _StatusItem({
+    required this.icon,
+    required this.label,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, size: 16, color: color),
+        const SizedBox(width: 4),
+        Text(label, style: const TextStyle(fontSize: 12)),
+      ],
     );
   }
 }

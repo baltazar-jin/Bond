@@ -23,6 +23,7 @@ dependencies:
   flutter_map_mbtiles: ^1.0.4
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.4.6
   flutter_test:
     sdk: flutter
@@ -38,7 +39,10 @@ flutter:
 
 flutter_native_splash:
   android: true
-  ios: true
 
   background_image: "assets/icons/background-splash.png"
   image: "assets/icons/logo.png"
+
+flutter_icons:
+  android: true
+  image_path: "assets/icons/logo.png"

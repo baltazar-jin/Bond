@@ -67,16 +67,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const SizedBox(height: 10),
 
               /// STATUS CARD 
-              RiskStatusCard(
-                 riskLevel: 'You are at risk',
-                  weatherCondition: 'Cloudy',
-                  humidity: 84,
-                  temperature: 31,
-                  windSpeed: 18,
-                  isOnline: false,
-                  isBluetoothOn: true,
-                  batteryPercent: 86,
-              ),
+              const RiskStatusCard(),
               
               const SizedBox(height: 20),
 
