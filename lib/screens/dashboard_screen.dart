@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:bond/screens/map_screen.dart';
 import 'package:bond/screens/circle_screen.dart';
 import 'package:bond/screens/alerts_screen.dart';
@@ -7,8 +6,8 @@ import 'package:bond/screens/user_screen.dart';
 import 'package:bond/widgets/header.dart';
 import 'package:bond/widgets/navbar.dart';
 import 'package:bond/widgets/SOS.dart';
-import 'package:bond/widgets/user_card.dart';
 import 'package:bond/widgets/quickaction.dart';
+import 'package:bond/widgets/user_card.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -27,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     if (index == 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => CircleScreen()),
+        MaterialPageRoute(builder: (_) => const CircleScreen()),
       );
     } else if (index == 2) {
       Navigator.push(
@@ -64,8 +63,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               const SizedBox(height: 24),
 
-              RiskStatusCard(),
+              const RiskStatusCard(),
 
+              // Quick action title
               const Row(
                 children: [
                   Icon(Icons.flash_on, color: Colors.orange, size: 24),
@@ -78,6 +78,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               const SizedBox(height: 16),
 
+              // First row of quick actions
               Row(
                 children: [
                   Expanded(
@@ -89,7 +90,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       iconColor: Colors.orange,
                       onTap: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => CircleScreen()),
+                        MaterialPageRoute(
+                            builder: (_) => const CircleScreen()),
                       ),
                     ),
                   ),
@@ -110,7 +112,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ],
               ),
 
+              const SizedBox(height: 16),
+
+              // BLE Toggle Button (separate row)
+              const QuickActionMockupDemo(),
+
               const SizedBox(height: 24),
+
+              // SOS Section
               const Row(
                 children: [
                   Icon(Icons.warning, color: Colors.orange, size: 24),
@@ -128,7 +137,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               const SizedBox(height: 20),
 
-              /// SOS BUTTON (unchanged)
               Center(
                 child: SOSButton(
                   onPressed: () {

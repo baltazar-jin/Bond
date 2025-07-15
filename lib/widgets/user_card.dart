@@ -21,7 +21,7 @@ class _RiskStatusCardState extends State<RiskStatusCard> {
 
   Future<void> fetchFloodRisk() async {
     try {
-      final url = Uri.parse("http://192.168.68.116:5000/predict-transition");
+      final url = Uri.parse("http://192.168.8.232:5000/predict-transition");
 
       final response = await http.post(
         url,
