@@ -46,13 +46,6 @@ Bond was created to solve a real problem in the Philippines: **disasters often k
 
 ---
 
-## 👨‍💻 Developer
-
-**Jin Christian Baltazar** 
-📱 Built for: My 1st Hackathon (2025)  
-🔗 [GitHub Profile](https://github.com/baltazar-jin)
-
----
 
 ## 📌 Status
 
